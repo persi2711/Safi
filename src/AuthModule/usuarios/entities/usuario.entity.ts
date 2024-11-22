@@ -1,8 +1,9 @@
 import { Optional } from '@nestjs/common';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Notificaciones } from './Notificaciones.entity';
-import { Cuenta } from 'src/cuentas/entities/cuenta.entity';
+
 import { Proyecto } from 'src/proyectos/entities/proyecto.entity';
+import { Cuenta } from 'src/cuentas/entities/cuenta.entity';
 
 @Entity({ name: 'Usuarios' })
 export class Usuario {
