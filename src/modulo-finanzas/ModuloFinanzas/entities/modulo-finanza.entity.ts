@@ -1,4 +1,4 @@
-import { Evento } from 'src/modulo-finanzas/Eventos/Enitity/Evento.entity';
+import { Evento } from 'src/modulo-finanzas/Eventos/Entity/Evento.entity';
 import { Fondo } from 'src/modulo-finanzas/Fondos/entity/Fondos.entity';
 import { Presupuesto } from 'src/modulo-finanzas/Presupuestos/entity/Presupuesto.entity';
 import { Proyecto } from 'src/proyectos/entities/proyecto.entity';

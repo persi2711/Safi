@@ -7,7 +7,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { IsString, IsInt, IsUUID } from 'class-validator';
-import { Evento } from 'src/modulo-finanzas/Eventos/Enitity/Evento.entity';
+import { Evento } from 'src/modulo-finanzas/Eventos/Entity/Evento.entity';
 @Entity({ name: 'Tareas' }) // Nombre de la tabla en la base de datos
 export class Tarea {
   @PrimaryGeneratedColumn('uuid')

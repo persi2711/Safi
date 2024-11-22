@@ -7,7 +7,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { Ingreso } from './Ingreso.entity';
-import { Gasto } from './gasto.enitity';
+import { Gasto } from './Gasto.entity';
 
 @Entity({ name: 'Presupuestos' })
 export class Presupuesto {
