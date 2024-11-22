@@ -6,7 +6,7 @@ import {
   ManyToOne,
 } from 'typeorm';
 import { Fondo } from './Fondos.entity';
-import { Cuenta } from 'src/cuentas/entities/cuenta.entity';
+import { Cuenta } from 'src/cuentas/entities/Cuenta.entity';
 
 @Entity({ name: 'TransaccionesFondos' })
 export class TransaccionFondo {

@@ -3,7 +3,7 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Notificaciones } from './Notificaciones.entity';
 
 import { Proyecto } from 'src/proyectos/entities/proyecto.entity';
-import { Cuenta } from 'src/cuentas/entities/cuenta.entity';
+import { Cuenta } from 'src/cuentas/entities/Cuenta.entity';
 
 @Entity({ name: 'Usuarios' })
 export class Usuario {

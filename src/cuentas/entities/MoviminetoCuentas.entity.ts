@@ -6,7 +6,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { Cuenta } from './cuenta.entity';
+import { Cuenta } from './Cuenta.entity';
 
 @Entity({ name: 'MovimientosCuentas' })
 export class MovimientoCuenta {

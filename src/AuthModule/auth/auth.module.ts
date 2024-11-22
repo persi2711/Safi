@@ -7,7 +7,7 @@ import { JwtStrategy } from './strategis/jwt.strategy';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
-import { Cuenta } from 'src/cuentas/entities/cuenta.entity';
+import { Cuenta } from 'src/cuentas/entities/Cuenta.entity';
 
 @Module({
   controllers: [AuthController],

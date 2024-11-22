@@ -7,7 +7,7 @@ import { Usuario } from './entities/usuario.entity';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthModule } from '../auth/auth.module';
 import { Notificaciones } from './entities/Notificaciones.entity';
-import { Cuenta } from 'src/cuentas/entities/cuenta.entity';
+import { Cuenta } from 'src/cuentas/entities/Cuenta.entity';
 
 @Module({
   controllers: [UsuariosController],

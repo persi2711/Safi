@@ -6,7 +6,7 @@ import {
 import { CreateCuentaDto } from './dto/create-cuenta.dto';
 import { UpdateCuentaDto } from './dto/update-cuenta.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Cuenta } from './entities/cuenta.entity';
+import { Cuenta } from './entities/Cuenta.entity';
 import { Repository } from 'typeorm';
 import { Usuario } from 'src/AuthModule/usuarios/entities/usuario.entity';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
