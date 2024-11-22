@@ -17,7 +17,7 @@ import { GetUser } from 'src/AuthModule/auth/Decorators/get-user.decorator';
 import { Usuario } from 'src/AuthModule/usuarios/entities/usuario.entity';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { RenameCuentaDto } from './dto/rename-cuenta.dto';
-import { TransferCuentaDto } from './dto/transfer-cuenta.dto';
+import { TransferCuentaDto } from './dto/Transfer-cuenta.dto';
 @ApiTags('Cuentas')
 @ApiBearerAuth()
 @Controller('cuentas')

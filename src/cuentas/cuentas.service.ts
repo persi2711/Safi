@@ -12,7 +12,7 @@ import { Repository } from 'typeorm';
 import { Usuario } from 'src/AuthModule/usuarios/entities/usuario.entity';
 
 import { RenameCuentaDto } from './dto/rename-cuenta.dto';
-import { TransferCuentaDto } from './dto/transfer-cuenta.dto';
+import { TransferCuentaDto } from './dto/Transfer-cuenta.dto';
 import { MovimientoCuenta } from './entities/MoviminetoCuentas.entity';
 
 @Injectable()
