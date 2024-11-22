@@ -1,11 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsUUID } from 'class-validator';
+import { IsNumber, IsString, IsUUID, Min } from 'class-validator';
 
 export class TransferCuentaDto {
   @ApiProperty()
-  @IsUUID()
+  @IsString()
   CuentaEnvia: string;
   @ApiProperty()
-  @IsUUID()
+  @IsString()
   CuentaRecibe: string;
+  @ApiProperty()
+  @Min(0)
+  @IsNumber()
+  Dinero: number;
 }

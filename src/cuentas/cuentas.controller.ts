@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Put,
 } from '@nestjs/common';
 import { CuentasService } from './cuentas.service';
 import { CreateCuentaDto } from './dto/create-cuenta.dto';
@@ -16,7 +17,7 @@ import { GetUser } from 'src/AuthModule/auth/Decorators/get-user.decorator';
 import { Usuario } from 'src/AuthModule/usuarios/entities/usuario.entity';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { RenameCuentaDto } from './dto/rename-cuenta.dto';
-import { TransferCuentaDto } from './dto/Transfer-cuenta.dto';
+import { TransferCuentaDto } from './dto/transfer-cuenta.dto';
 @ApiTags('Cuentas')
 @ApiBearerAuth()
 @Controller('cuentas')
@@ -51,15 +52,6 @@ export class CuentasController {
   @UseGuards(AuthGuard())
   rename(@Param('id') id: string, @Body() renameCuentaDto: RenameCuentaDto) {
     return this.cuentasService.rename(id, renameCuentaDto);
-  }
-
-  @Patch()
-  @UseGuards(AuthGuard())
-  transfer(
-    @Body() transferCuentaDto: TransferCuentaDto,
-    @GetUser() user: Usuario,
-  ) {
-    return this.cuentasService.Transfer(transferCuentaDto, user);
   }
 
   @Delete(':id')

@@ -1,6 +1,7 @@
 import {
   BadRequestException,
   Injectable,
+  InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
 import { CreateCuentaDto } from './dto/create-cuenta.dto';
@@ -9,16 +10,18 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Cuenta } from './entities/Cuenta.entity';
 import { Repository } from 'typeorm';
 import { Usuario } from 'src/AuthModule/usuarios/entities/usuario.entity';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { repeat } from 'rxjs';
+
 import { RenameCuentaDto } from './dto/rename-cuenta.dto';
-import { TransferCuentaDto } from './dto/Transfer-cuenta.dto';
+import { TransferCuentaDto } from './dto/transfer-cuenta.dto';
+import { MovimientoCuenta } from './entities/MoviminetoCuentas.entity';
 
 @Injectable()
 export class CuentasService {
   constructor(
     @InjectRepository(Cuenta)
     private CuentaRepository: Repository<Cuenta>,
+    @InjectRepository(MovimientoCuenta)
+    private MovimientoCuentaRepository: Repository<MovimientoCuenta>,
   ) {}
 
   async create(createCuentaDto: CreateCuentaDto, user: Usuario) {
@@ -43,9 +46,13 @@ export class CuentasService {
   }
 
   async findOne(id: string) {
-    return await this.CuentaRepository.findOne({
+    const cuenta = await this.CuentaRepository.findOne({
       where: { Estado: 1, Id: id },
     });
+    if (!cuenta) {
+      throw new NotFoundException('No se encontro la cuenta');
+    }
+    return cuenta;
   }
 
   async update(id: string, updateCuentaDto: UpdateCuentaDto) {
@@ -109,5 +116,59 @@ export class CuentasService {
     return cuenta;
   }
 
-  async Transfer(tranfercunetaDto: TransferCuentaDto, user: Usuario) {}
+  async Transfer(tranfercunetaDto: TransferCuentaDto, user: Usuario) {
+    const cuentaEnvia = await this.CuentaRepository.findOne({
+      where: { Id: tranfercunetaDto.CuentaEnvia, Estado: 1 },
+    });
+    if (!cuentaEnvia) {
+      throw new BadRequestException('La cuenta que envia no existe');
+    }
+    if (cuentaEnvia.Dinero < tranfercunetaDto.Dinero) {
+      throw new BadRequestException('la cuenta no tiene suficientes fondos');
+    }
+    const cuentaRecibe = await this.CuentaRepository.findOne({
+      where: { Id: tranfercunetaDto.CuentaRecibe, Estado: 1 },
+    });
+    if (!cuentaRecibe) {
+      throw new BadRequestException('La cuenta que envia no existe');
+    }
+    cuentaEnvia.Dinero =
+      Number(cuentaEnvia.Dinero) - Number(tranfercunetaDto.Dinero);
+    cuentaRecibe.Dinero =
+      Number(cuentaRecibe.Dinero) + Number(tranfercunetaDto.Dinero);
+
+    const movimientoCuenta = await this.MovimientoCuentaRepository.create({
+      Dinero: tranfercunetaDto.Dinero,
+      Fecha: Date(),
+      CuentaEnvia: cuentaEnvia,
+      CuentaRecibe: cuentaRecibe,
+      usuario: user,
+    });
+    if (!movimientoCuenta) {
+      throw new InternalServerErrorException(
+        'no se pudo generar el registro de tranferencia',
+      );
+    }
+    await this.CuentaRepository.save(cuentaEnvia);
+    await this.CuentaRepository.save(cuentaRecibe);
+    await this.MovimientoCuentaRepository.save(movimientoCuenta);
+    return movimientoCuenta;
+  }
+  async findAllTransfers(user: Usuario) {
+    const transferencias = await this.MovimientoCuentaRepository.find({
+      where: { usuario: user },
+      relations: ['CuentaRecibe', 'CuentaEnvia'],
+    });
+    return transferencias;
+  }
+  async findOneTransfer(id: string) {
+    const transferencia = await this.MovimientoCuentaRepository.findOne({
+      where: { Id: id },
+      relations: ['CuentaRecibe', 'CuentaEnvia'],
+    });
+    if (!transferencia) {
+      throw new NotFoundException('No se encontro la tarsnferencia');
+    }
+    return transferencia;
+  }
 }

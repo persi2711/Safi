@@ -17,7 +17,7 @@ export class Cuenta {
   @Column({ type: 'varchar', length: 255 })
   Nombre: string;
 
-  @Column({ type: 'decimal', precision: 15, scale: 2, default: 0 })
+  @Column({ type: 'decimal' })
   Dinero: number;
 
   @Column({ type: 'int' })

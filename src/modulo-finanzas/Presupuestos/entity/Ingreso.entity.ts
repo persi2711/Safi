@@ -13,7 +13,7 @@ export class Ingreso {
   @PrimaryGeneratedColumn('uuid')
   Id: string; // UUID como clave primaria
 
-  @Column({ type: 'decimal', precision: 15, scale: 2, default: 0 })
+  @Column({ type: 'decimal' })
   Dinero: number;
 
   @Column({ type: 'text', nullable: true })

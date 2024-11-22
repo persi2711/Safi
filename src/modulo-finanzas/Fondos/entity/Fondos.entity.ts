@@ -17,7 +17,7 @@ export class Fondo {
   @CreateDateColumn({ name: 'fecha_de_creacion', type: 'timestamp' })
   FechaDeCreacion: Date;
 
-  @Column({ type: 'decimal', precision: 15, scale: 2, default: 0 })
+  @Column({ type: 'decimal' })
   Dinero: number;
 
   @Column({ type: 'boolean', default: true })
