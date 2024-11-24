@@ -14,11 +14,23 @@ export class Fondo {
   @PrimaryGeneratedColumn('uuid')
   Id: string; // UUID como clave primaria
 
+  @Column({ type: 'varchar', length: 255 })
+  Nombre: string;
+
   @CreateDateColumn({ name: 'fecha_de_creacion', type: 'timestamp' })
   FechaDeCreacion: Date;
 
   @Column({ type: 'decimal' })
-  Dinero: number;
+  Efectivo: number;
+
+  @Column({ type: 'decimal' })
+  Digital: number;
+
+  @Column({ type: 'decimal' })
+  Total: number;
+
+  @Column({ type: 'int' })
+  Tipo: number;
 
   @Column({ type: 'boolean', default: true })
   Estado: boolean;

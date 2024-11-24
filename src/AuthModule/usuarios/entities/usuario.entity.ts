@@ -5,6 +5,7 @@ import { Notificaciones } from './Notificaciones.entity';
 import { Proyecto } from 'src/proyectos/entities/proyecto.entity';
 import { Cuenta } from 'src/cuentas/entities/Cuenta.entity';
 import { MovimientoCuenta } from 'src/cuentas/entities/MoviminetoCuentas.entity';
+import { TransaccionFondo } from 'src/modulo-finanzas/Fondos/entity/TransaccionesFondos.entity';
 
 @Entity({ name: 'Usuarios' })
 export class Usuario {
@@ -37,4 +38,9 @@ export class Usuario {
     { cascade: true },
   )
   movimientos: MovimientoCuenta[];
+  @OneToMany(
+    () => TransaccionFondo,
+    (transaccionFondo) => transaccionFondo.usuario,
+  )
+  transacciones: TransaccionFondo[];
 }

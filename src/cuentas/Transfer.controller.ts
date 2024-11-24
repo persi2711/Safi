@@ -29,6 +29,12 @@ export class TransferController {
   findAll(@GetUser() user: Usuario) {
     return this.cuentasService.findAllTransfers(user);
   }
+
+  @Get('cuenta:id')
+  @UseGuards(AuthGuard())
+  findbycuenta(@Param('id') id: string) {
+    return this.cuentasService.findByCuenta(id);
+  }
   @Patch()
   @UseGuards(AuthGuard())
   transfer(

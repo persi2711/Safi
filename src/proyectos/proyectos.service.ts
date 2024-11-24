@@ -23,7 +23,7 @@ export class ProyectosService {
 
   async create(createProyectoDto: CreateProyectoDto, user: Usuario) {
     const repeat = await this.proyectoRespository.findOne({
-      where: { Nombre: createProyectoDto.Nombre, Usuario: user },
+      where: { Nombre: createProyectoDto.Nombre, Usuario: user, Estado: 1 },
     });
     if (repeat) {
       throw new BadRequestException('Ya existe un proyecto con ese nombre');

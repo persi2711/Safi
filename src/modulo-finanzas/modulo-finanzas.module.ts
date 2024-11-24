@@ -11,10 +11,19 @@ import { TransaccionFondo } from './Fondos/entity/TransaccionesFondos.entity';
 import { ModuloFinanzas } from './ModuloFinanzas/entities/modulo-finanza.entity';
 import { Tarea } from './Tareas/entity/Tarea.entity';
 import { Gasto } from './Presupuestos/entity/Gasto.entity';
+import { AuthModule } from 'src/AuthModule/auth/auth.module';
+import { FondosController } from './Fondos/Fondos.controller';
+import { FondoService } from './Fondos/Fondos.service';
+import { TransaccionesFondosController } from './Fondos/TransaccionesFondos.controller';
+import { TransaccionesFondoService } from './Fondos/TransaccionesFondos.service';
 
 @Module({
-  controllers: [ModuloFinanzasController],
-  providers: [ModuloFinanzasService],
+  controllers: [
+    ModuloFinanzasController,
+    FondosController,
+    TransaccionesFondosController,
+  ],
+  providers: [ModuloFinanzasService, FondoService, TransaccionesFondoService],
   imports: [
     TypeOrmModule.forFeature([
       Evento,
@@ -26,6 +35,7 @@ import { Gasto } from './Presupuestos/entity/Gasto.entity';
       ModuloFinanzas,
       Tarea,
     ]),
+    AuthModule,
   ],
   exports: [TypeOrmModule],
 })

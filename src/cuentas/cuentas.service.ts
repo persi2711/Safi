@@ -26,7 +26,7 @@ export class CuentasService {
 
   async create(createCuentaDto: CreateCuentaDto, user: Usuario) {
     const repeat = await this.CuentaRepository.findOne({
-      where: { Nombre: createCuentaDto.Nombre, Estado: 1 },
+      where: { Nombre: createCuentaDto.Nombre, Estado: 1, Usuario: user },
     });
     if (repeat) {
       throw new BadRequestException('Ya existe una cuenta con ese nombre');
@@ -170,5 +170,21 @@ export class CuentasService {
       throw new NotFoundException('No se encontro la tarsnferencia');
     }
     return transferencia;
+  }
+  async findByCuenta(id: string) {
+    const cuenta = await this.CuentaRepository.findOne({ where: { Id: id } });
+    if (!cuenta) {
+      throw new NotFoundException('No se encontro la cuenta');
+    }
+    const transferencias1 = await this.MovimientoCuentaRepository.find({
+      where: { CuentaEnvia: cuenta },
+      relations: ['CuentaRecibe', 'CuentaEnvia'],
+    });
+    const transferencias2 = await this.MovimientoCuentaRepository.find({
+      where: { CuentaRecibe: cuenta },
+      relations: ['CuentaRecibe', 'CuentaEnvia'],
+    });
+    const transferencias = transferencias1.concat(transferencias2);
+    return transferencias.sort((a, b) => b.Fecha.getTime() - a.Fecha.getTime());
   }
 }
