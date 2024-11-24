@@ -16,14 +16,23 @@ import { FondosController } from './Fondos/Fondos.controller';
 import { FondoService } from './Fondos/Fondos.service';
 import { TransaccionesFondosController } from './Fondos/TransaccionesFondos.controller';
 import { TransaccionesFondoService } from './Fondos/TransaccionesFondos.service';
+import { TransFondo } from './Fondos/entity/TransFondos.entity';
+import { TransFondoController } from './Fondos/TransFondo.controller';
+import { TransFondoService } from './Fondos/TransFondo.service';
 
 @Module({
   controllers: [
     ModuloFinanzasController,
     FondosController,
     TransaccionesFondosController,
+    TransFondoController,
   ],
-  providers: [ModuloFinanzasService, FondoService, TransaccionesFondoService],
+  providers: [
+    ModuloFinanzasService,
+    FondoService,
+    TransaccionesFondoService,
+    TransFondoService,
+  ],
   imports: [
     TypeOrmModule.forFeature([
       Evento,
@@ -34,6 +43,7 @@ import { TransaccionesFondoService } from './Fondos/TransaccionesFondos.service'
       TransaccionFondo,
       ModuloFinanzas,
       Tarea,
+      TransFondo,
     ]),
     AuthModule,
   ],

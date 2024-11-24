@@ -8,6 +8,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { TransaccionFondo } from './TransaccionesFondos.entity';
+import { TransFondo } from './TransFondos.entity';
 
 @Entity({ name: 'Fondos' })
 export class Fondo {
@@ -36,9 +37,15 @@ export class Fondo {
   Estado: boolean;
   @ManyToOne(() => ModuloFinanzas, (moduloFinanzas) => moduloFinanzas.Fondos)
   ModuloFinanzas: ModuloFinanzas;
+
   @OneToMany(
     () => TransaccionFondo,
     (transaccionFondo) => transaccionFondo.Fondo,
   )
   TransaccionesFondos: TransaccionFondo[];
+  @OneToMany(() => TransFondo, (transFondo) => transFondo.FondoEnviado)
+  TransEnviado: TransFondo[];
+
+  @OneToMany(() => TransFondo, (transFondo) => transFondo.FondoRecibe)
+  TransRecibido: TransFondo[];
 }

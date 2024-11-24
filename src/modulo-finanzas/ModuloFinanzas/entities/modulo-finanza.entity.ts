@@ -1,6 +1,7 @@
 import { Evento } from 'src/modulo-finanzas/Eventos/Entity/Evento.entity';
 import { Fondo } from 'src/modulo-finanzas/Fondos/entity/Fondos.entity';
 import { TransaccionFondo } from 'src/modulo-finanzas/Fondos/entity/TransaccionesFondos.entity';
+import { TransFondo } from 'src/modulo-finanzas/Fondos/entity/TransFondos.entity';
 import { Presupuesto } from 'src/modulo-finanzas/Presupuestos/entity/Presupuesto.entity';
 import { Proyecto } from 'src/proyectos/entities/proyecto.entity';
 import {
@@ -35,4 +36,8 @@ export class ModuloFinanzas {
     (transaccionFondo) => transaccionFondo.moduloFinanzas,
   )
   transacciones: TransaccionFondo[];
+  @OneToMany(() => TransFondo, (transFondo) => transFondo.moduloFinanzas, {
+    cascade: true,
+  })
+  transFondo: TransFondo[];
 }
