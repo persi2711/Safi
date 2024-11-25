@@ -39,9 +39,14 @@ export class CuentasService {
     return cuenta;
   }
 
-  async findAll(user: Usuario) {
+  async findAllEfectivo(user: Usuario) {
     return await this.CuentaRepository.find({
-      where: { Estado: 1, Usuario: user },
+      where: { Estado: 1, Usuario: user, Tipo: 0 },
+    });
+  }
+  async findAllBanco(user: Usuario) {
+    return await this.CuentaRepository.find({
+      where: { Estado: 1, Usuario: user, Tipo: 1 },
     });
   }
 

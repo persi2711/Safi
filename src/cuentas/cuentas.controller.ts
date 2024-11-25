@@ -30,10 +30,15 @@ export class CuentasController {
     return this.cuentasService.create(createCuentaDto, user);
   }
 
-  @Get()
+  @Get('banco')
   @UseGuards(AuthGuard())
-  findAll(@GetUser() user: Usuario) {
-    return this.cuentasService.findAll(user);
+  findAllbanco(@GetUser() user: Usuario) {
+    return this.cuentasService.findAllBanco(user);
+  }
+  @Get('efectivo')
+  @UseGuards(AuthGuard())
+  findAllefectivo(@GetUser() user: Usuario) {
+    return this.cuentasService.findAllEfectivo(user);
   }
 
   @Get(':id')
