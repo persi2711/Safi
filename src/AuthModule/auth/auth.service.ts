@@ -60,7 +60,7 @@ export class AuthService {
     const now = Date().toString();
     await this.userRepository.save(usuario);
 
-    return 'Se creo el usuario con exito';
+    return usuario;
   }
 
   private getJwtToken(payload: JwtPayload) {

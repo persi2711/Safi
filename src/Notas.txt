@@ -1,5 +1,5 @@
 Presupuestos{
-    Tipotransaccion(0=ingreo, 1=gasto)
+    Tipotransaccion(0=ingreso, 1=gasto)
     tipoPresupuesto(0=espectado, 1=asignado)
 }
 Fondos
@@ -22,3 +22,66 @@ Gasto
 {
     TipoDinero(0=efectivo, 1=banco)
 }
+Transferencias cuanta-fondo
+{
+  "Dinero": 100.5,
+   Tipo(1=Cuenta->Fondo, 0=Fondo->Cuenta)
+  "FondoId": "fae1b1fc-1234-5678-9012-abcdef123456",
+  "CuentaId": "bcde2c5d-1234-5678-9012-abcdef654321",
+  "ModuloFinanzasId": "abcd1234-5678-9012-3456-abcdefabcdef"
+}
+
+Presupuestos{
+    Tipotransaccion(0=ingreso, 1=gasto)
+    tipoPresupuesto(0=espectado, 1=asignado)
+}
+{
+  "Nombre": "Presupuesto mensual",
+  "Descipcion": "Presupuesto mensual",
+  "Presupuesto": 1000,
+  "Efectivo": 1000(Si el tipo de presupuesto es 1(Asignado)),
+  "Digital": 1000(Si el tipo de presupuesto es 1(Asignado)),
+  "TipoPresupuesto": 1,
+  "TipoTransaccion": 1,
+  "ModuloFinanzasId": "fae1b1fc-1234-5678-9012-abcdef123456",
+  "FondoId": "fae1b1fc-1234-5678-9012-abcdef123456"
+}
+Evento
+{
+  "Dinero": 500,
+  "Descripcion": "Ingreso por venta de productos",
+  "Tipo": 1 (1=ingreso,0=gasto ),
+  "TipoDinero": 1 (0=efectivo, 1=banco),
+  "PresupuestoId": "fae1b1fc-1234-5678-9012-abcdef123456",
+  "ModuloFinanzasId": "bcde2c5d-1234-5678-9012-abcdef654321"
+  "titulo": string;
+  "descripcion": string;
+  "fechaInicio": Date;
+  "reglaRecurrencia": string;
+  "completado": boolean;
+}
+Cuenta
+{
+
+  "Nombre": "string",
+  "Dinero": 0,
+  "Tipo": 0 (0=efectivo, 1=banco)
+}
+
+Transfondo
+{
+  "Dinero": 100.5,
+  "Tipo": 1(0=efectivo 1=Digital,),
+  "FondoEnvia": "fae1b1fc-1234-5678-9012-abcdef123456",
+  "FondoRecibe": "fae1b1fc-1234-5678-9012-abcdef123456",
+  "ModuloFinanzasId": "abcd1234-5678-9012-3456-abcdefabcdef"
+}
+Transaccionescf (Transferencia fondo-cuentas)
+{
+  "Dinero": 100.5,
+  "Tipo": 1 (0=efectivo 1=Digital),
+  "FondoId": "fae1b1fc-1234-5678-9012-abcdef123456",
+  "CuentaId": "bcde2c5d-1234-5678-9012-abcdef654321",
+  "ModuloFinanzasId": "abcd1234-5678-9012-3456-abcdefabcdef"
+}
+

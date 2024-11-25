@@ -16,7 +16,7 @@ import { GetUser } from 'src/AuthModule/auth/Decorators/get-user.decorator';
 import { Usuario } from 'src/AuthModule/usuarios/entities/usuario.entity';
 import { TransFondoService } from './TransFondo.service';
 import { CreateTransFondo } from './dto/createTransFondo.dto';
-@ApiTags('Transferencias Fondo-Fodo')
+@ApiTags('Transferencias Fondo-Fondo')
 @ApiBearerAuth()
 @Controller('transfondo')
 export class TransFondoController {
