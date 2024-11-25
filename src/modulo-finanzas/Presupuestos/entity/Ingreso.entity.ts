@@ -7,6 +7,7 @@ import {
 } from 'typeorm';
 import { Presupuesto } from './Presupuesto.entity';
 import { text } from 'stream/consumers';
+import { ModuloFinanzas } from 'src/modulo-finanzas/ModuloFinanzas/entities/modulo-finanza.entity';
 
 @Entity({ name: 'Ingresos' })
 export class Ingreso {
@@ -26,4 +27,10 @@ export class Ingreso {
   Estado: boolean;
   @ManyToOne(() => Presupuesto, (presupuesto) => presupuesto.Ingresos)
   Presupuesto: Presupuesto;
+  @ManyToOne(
+    () => ModuloFinanzas,
+    (moduloFinanzas) => moduloFinanzas.Ingresos,
+    { onDelete: 'CASCADE' },
+  )
+  ModuloFinanzas: ModuloFinanzas;
 }
