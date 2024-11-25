@@ -62,9 +62,13 @@ export class FondoService {
       throw new NotFoundException('No se encontro el modulo');
     }
 
-    return await this.fondoRepository.find({
-      where: { ModuloFinanzas: modulo, Estado: true, Tipo: 1 && 0 },
+    const fondos = await this.fondoRepository.find({
+      where: { ModuloFinanzas: modulo, Estado: true, Tipo: 1 },
     });
+    const fonodoG = await this.fondoRepository.find({
+      where: { ModuloFinanzas: modulo, Estado: true, Tipo: 0 },
+    });
+    return fonodoG.concat(fondos);
   }
   async findAllAsignados(getFondoDto: GetFondoDto) {
     const modulo = await this.moduloFinazasRepository.findOne({
