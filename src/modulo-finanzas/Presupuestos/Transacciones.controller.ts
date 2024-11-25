@@ -11,17 +11,17 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { TransaccionesService } from './Transacciones.service';
+import { CreateTransaccionDto } from './dto/CreateTransaccion.dto';
 
 @ApiTags('Transacciones')
 @ApiBearerAuth()
 @Controller('transacciones')
-export class PresupuestoController {
-  /*
+export class TransaccionesController {
   constructor(private readonly transaccionesService: TransaccionesService) {}
   @UseGuards(AuthGuard())
   @Post()
-  create(@Body() createFondoDto: CreatePresupuestoDto) {
-    return this.transaccionesService.create(createFondoDto);
+  create(@Body() createTransaccionDto: CreateTransaccionDto) {
+    return this.transaccionesService.create(createTransaccionDto);
   }
   @UseGuards(AuthGuard())
   @Get('selectall:id')
@@ -29,15 +29,24 @@ export class PresupuestoController {
     return this.transaccionesService.findAll(id);
   }
   @UseGuards(AuthGuard())
-  @Get('selectone:id')
-  findOne(@Param('id') id: string) {
-    return this.transaccionesService.findOne(id);
+  @Get('ingreso:id')
+  findOneIngreso(@Param('id') id: string) {
+    return this.transaccionesService.findOneGasto(id);
+  }
+  @UseGuards(AuthGuard())
+  @Get('gasto:id')
+  findOneGasto(@Param('id') id: string) {
+    return this.transaccionesService.findOneIngreso(id);
   }
 
   @UseGuards(AuthGuard())
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.transaccionesService.remove(id);
+  @Delete('ingreso:id')
+  removeIngreso(@Param('id') id: string) {
+    return this.transaccionesService.removeIngreso(id);
   }
-    */
+  @UseGuards(AuthGuard())
+  @Delete('gasto:id')
+  removeGasto(@Param('id') id: string) {
+    return this.transaccionesService.removeGasto(id);
+  }
 }

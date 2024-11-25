@@ -9,6 +9,5 @@ export class LoginUsuarioDdto {
   @ApiProperty()
   @IsString()
   @MaxLength(50)
-  @MinLength(8)
   Password: string;
 }

@@ -21,7 +21,8 @@ export class Gasto {
 
   @CreateDateColumn({ name: 'fecha_de_creacion', type: 'timestamp' })
   FechaDeCreacion: Date;
-
+  @Column({ type: 'int' })
+  TipoDinero: number;
   @Column({ type: 'boolean', default: true })
   Estado: boolean;
   @ManyToOne(() => Presupuesto, (presupuesto) => presupuesto.Gastos)

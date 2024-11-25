@@ -14,3 +14,11 @@ Transferencias cuanta-fondo
 {
     Tipo(1=Cuenta->Fondo, 0=Fondo->Cuenta)
 }
+transaccion
+{
+    tipo(1=ingreso,0=gasto )
+}
+Gasto
+{
+    TipoDinero(0=efectivo, 1=banco)
+}

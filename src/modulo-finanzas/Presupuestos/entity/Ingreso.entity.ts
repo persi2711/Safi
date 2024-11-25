@@ -16,7 +16,8 @@ export class Ingreso {
 
   @Column({ type: 'decimal' })
   Dinero: number;
-
+  @Column({ type: 'int' })
+  TipoDinero: number;
   @Column({ type: 'text', nullable: true })
   Descripcion: string;
 

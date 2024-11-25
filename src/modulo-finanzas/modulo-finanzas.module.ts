@@ -21,21 +21,23 @@ import { TransFondoController } from './Fondos/TransFondo.controller';
 import { TransFondoService } from './Fondos/TransFondo.service';
 import { PresupuestoController } from './Presupuestos/Presupuestos.controller';
 import { PresupuestoService } from './Presupuestos/Presupuestos.service';
+import { TransaccionesController } from './Presupuestos/Transacciones.controller';
+import { TransaccionesService } from './Presupuestos/Transacciones.service';
 
 @Module({
   controllers: [
-    ModuloFinanzasController,
     FondosController,
     TransaccionesFondosController,
     TransFondoController,
     PresupuestoController,
+    TransaccionesController,
   ],
   providers: [
-    ModuloFinanzasService,
     FondoService,
     TransaccionesFondoService,
     TransFondoService,
     PresupuestoService,
+    TransaccionesService,
   ],
   imports: [
     TypeOrmModule.forFeature([

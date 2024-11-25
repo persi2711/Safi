@@ -188,12 +188,14 @@ export class PresupuestoService {
     }
     return await this.presupuestoRepository.find({
       where: { ModuloFinanzas: modulo, Estado: 1 },
+      relations: ['Fondo'],
     });
   }
 
   async findOne(id: string) {
     const presupuesto = await this.presupuestoRepository.findOne({
       where: { Id: id, Estado: 1 },
+      relations: ['Fondo'],
     });
     if (!presupuesto) {
       throw new NotFoundException('No se encontro el presupuesto');
