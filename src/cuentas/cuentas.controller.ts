@@ -40,6 +40,11 @@ export class CuentasController {
   findAllefectivo(@GetUser() user: Usuario) {
     return this.cuentasService.findAllEfectivo(user);
   }
+  @Get('todo')
+  @UseGuards(AuthGuard())
+  findAll(@GetUser() user: Usuario) {
+    return this.cuentasService.findAll(user);
+  }
 
   @Get(':id')
   @UseGuards(AuthGuard())
