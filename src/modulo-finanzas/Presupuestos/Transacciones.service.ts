@@ -133,9 +133,11 @@ export class TransaccionesService {
     }
     const ingresos = await this.ingresoRepository.find({
       where: { ModuloFinanzas: modulo },
+      relations: ['Presupuesto'],
     });
     const gastos = await this.gastoRepository.find({
       where: { ModuloFinanzas: modulo },
+      relations: ['Presupuesto'],
     });
     const result = ingresos.concat(gastos);
     return result.sort(
