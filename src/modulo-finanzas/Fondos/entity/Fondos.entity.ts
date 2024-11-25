@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 import { TransaccionFondo } from './TransaccionesFondos.entity';
 import { TransFondo } from './TransFondos.entity';
+import { Presupuesto } from 'src/modulo-finanzas/Presupuestos/entity/Presupuesto.entity';
 
 @Entity({ name: 'Fondos' })
 export class Fondo {
@@ -48,4 +49,6 @@ export class Fondo {
 
   @OneToMany(() => TransFondo, (transFondo) => transFondo.FondoRecibe)
   TransRecibido: TransFondo[];
+  @OneToMany(() => Presupuesto, (presupuesto) => presupuesto.Fondo)
+  Presupuestos: Presupuesto[];
 }

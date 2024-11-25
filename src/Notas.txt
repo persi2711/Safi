@@ -1,0 +1,16 @@
+Presupuestos{
+    Tipotransaccion(0=ingreo, 1=gasto)
+    tipoPresupuesto(0=espectado, 1=asignado)
+}
+Fondos
+{
+    Tipo(0=fondo principal, 1=fondos normales, 2 fondos asignados )
+}
+Cuenta
+{
+    Tipo(0=efectivo, 1=banco)
+}
+Transferencias cuanta-fondo
+{
+    Tipo(1=Cuenta->Fondo, 0=Fondo->Cuenta)
+}

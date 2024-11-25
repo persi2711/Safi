@@ -19,6 +19,8 @@ import { TransaccionesFondoService } from './Fondos/TransaccionesFondos.service'
 import { TransFondo } from './Fondos/entity/TransFondos.entity';
 import { TransFondoController } from './Fondos/TransFondo.controller';
 import { TransFondoService } from './Fondos/TransFondo.service';
+import { PresupuestoController } from './Presupuestos/Presupuestos.controller';
+import { PresupuestoService } from './Presupuestos/Presupuestos.service';
 
 @Module({
   controllers: [
@@ -26,12 +28,14 @@ import { TransFondoService } from './Fondos/TransFondo.service';
     FondosController,
     TransaccionesFondosController,
     TransFondoController,
+    PresupuestoController,
   ],
   providers: [
     ModuloFinanzasService,
     FondoService,
     TransaccionesFondoService,
     TransFondoService,
+    PresupuestoService,
   ],
   imports: [
     TypeOrmModule.forFeature([

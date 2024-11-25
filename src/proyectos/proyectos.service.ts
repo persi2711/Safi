@@ -11,6 +11,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Proyecto } from './entities/proyecto.entity';
 import { Repository } from 'typeorm';
 import { ModuloFinanzas } from 'src/modulo-finanzas/ModuloFinanzas/entities/modulo-finanza.entity';
+import { Fondo } from '../modulo-finanzas/Fondos/entity/Fondos.entity';
 
 @Injectable()
 export class ProyectosService {
@@ -19,6 +20,8 @@ export class ProyectosService {
     private proyectoRespository: Repository<Proyecto>,
     @InjectRepository(ModuloFinanzas)
     private ModuloFinanzasRepository: Repository<ModuloFinanzas>,
+    @InjectRepository(Fondo)
+    private fondoRepository: Repository<Fondo>,
   ) {}
 
   async create(createProyectoDto: CreateProyectoDto, user: Usuario) {
@@ -36,6 +39,22 @@ export class ProyectosService {
     if (!ModuloDB) {
       throw new InternalServerErrorException('No se pudo generar el modulo');
     }
+
+    const fondo = await this.fondoRepository.create({
+      ModuloFinanzas: ModuloDB,
+      Estado: true,
+      Efectivo: 0,
+      Digital: 0,
+      Total: 0,
+      Tipo: 0,
+      Nombre: 'Fondo General',
+    });
+    if (!fondo) {
+      throw new InternalServerErrorException(
+        'No se pudo crear el fondo general',
+      );
+    }
+    await this.fondoRepository.save(fondo);
     const proyecto = await this.proyectoRespository.create({
       Nombre: createProyectoDto.Nombre,
       Estado: 1,

@@ -103,6 +103,19 @@ export class FondoService {
     if (!fondo) {
       throw new NotFoundException('no se encotro el fondo');
     }
+    if (fondo.Tipo === 0) {
+      throw new BadRequestException('NO se puede eliminar el fondo general');
+    }
+    if (fondo.Tipo === 2) {
+      throw new BadRequestException(
+        'NO se puede eliminar un fondo asignado, elimine el presupuesto para liberar los fondos',
+      );
+    }
+    if (fondo.Total !== 0) {
+      throw new BadRequestException(
+        'NO se puede eliminar un fondo dinero, mueva el dinero a otro fondo antes de eliminarlo',
+      );
+    }
     fondo.Estado = false;
     return await this.fondoRepository.save(fondo);
   }
