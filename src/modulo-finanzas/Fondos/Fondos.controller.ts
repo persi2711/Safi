@@ -35,6 +35,11 @@ export class FondosController {
     return this.fondoService.findAll(getFondoDto);
   }
   @UseGuards(AuthGuard())
+  @Put('selectallAsignados')
+  findAllAsignados(@Body() getFondoDto: GetFondoDto) {
+    return this.fondoService.findAllAsignados(getFondoDto);
+  }
+  @UseGuards(AuthGuard())
   @Get('selectone:id')
   findOne(@Param('id') id: string) {
     return this.fondoService.findOne(id);
